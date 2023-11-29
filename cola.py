@@ -38,7 +38,6 @@ class Cola(object):
             info = self.atencion()
             print(info)
             colaAuxiliar.arribo(info)
-
         while not colaAuxiliar.esVacia():
             info = colaAuxiliar.atencion()
             self.arribo(info)

@@ -2,6 +2,7 @@ from math import inf
 from cola import Cola
 from heap_invert import Heap
 from pila import Pila
+import heapq
 
 
 class nodoArista(object):
@@ -219,6 +220,7 @@ class Grafo(object):
         camino = Pila()
         aux = self.inicio
         while aux is not None:
+            print(aux)
             if aux == origen:
                 no_visitados.arribo([aux, None], 0)
             else:
@@ -237,3 +239,31 @@ class Grafo(object):
                     no_visitados.cambiar_prioridad(pos, dato[0] + aux.info)
                 aux = aux.siguiente
         return camino
+
+
+"""
+    def dijkstra_unica_ruta(self, nodo_inicial, nodo_destino):
+    distancia = {nodo: float('inf') for nodo in self.nodos}
+    distancia[nodo_inicial] = 0
+
+    heap = [(0, nodo_inicial)]
+    padres = {nodo_inicial: None}
+
+    while heap:
+        (dist, nodo_actual) = heapq.heappop(heap)
+
+        if nodo_actual == nodo_destino:
+            # Construir la ruta si hemos llegado al nodo destino
+            ruta = []
+            while nodo_actual is not None:
+                ruta.insert(0, nodo_actual)
+                nodo_actual = padres[nodo_actual]
+            return ruta
+
+        for vecino, peso in self.aristas[nodo_actual].items():
+            nueva_distancia = distancia[nodo_actual] + peso
+            if nueva_distancia < distancia[vecino]:
+                distancia[vecino] = nueva_distancia
+                padres[vecino] = nodo_actual
+                heapq.heappush(heap, (nueva_distancia, vecino))
+"""

@@ -1,3 +1,4 @@
+# padre mayor que hijos
 class Heap(object):
     def __init__(self, tamanio):
         self.tamanio = 0
@@ -87,6 +88,8 @@ class Heap(object):
 
 
     # para ordenar un vector
+
+
     def monticulizar(self):
         for i in range(len(self.vector)):
             self.flotar(i)
@@ -94,6 +97,6 @@ class Heap(object):
 
     def HeapSort(self):
         aux = self.tamanio
-        for i in range(self.tamanio):
+        for _ in range(self.tamanio):
             self.quitar()
         self.tamanio = aux

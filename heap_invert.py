@@ -1,6 +1,7 @@
+# Padres menores que hijos
 class Heap(object):
     def __init__(self, tamanio):
-        self.tamanio = tamanio
+        self.tamanio = 0
         self.vector = [None] * tamanio
 
 
@@ -17,6 +18,13 @@ class Heap(object):
             indice = padre
 
 
+    def flotar_prioridad(self, indice):
+        while self.vector[(indice - 1) // 2] == None or indice > 0 and self.vector[indice][0] < self.vector[(indice - 1) // 2][0]:
+            padre = (indice - 1) // 2
+            self.intercambio(self.vector, indice, padre)
+            indice = padre
+
+
     def hundir(self, indice):
         hijo_izq = (indice * 2) + 1
         control = True
@@ -26,7 +34,6 @@ class Heap(object):
             if hijo_der < self.tamanio:
                 if self.vector[hijo_der] < self.vector[hijo_izq]:
                     aux = hijo_der
-
             if self.vector[indice] > self.vector[aux]:
                 self.intercambio(self.vector, indice, aux)
                 indice = aux
@@ -35,9 +42,38 @@ class Heap(object):
                 control = False
 
 
+    def hundir_prioridad(self, indice):
+        hijo_izq = (indice * 2) + 1
+        control = True
+        print("---------")
+        print(self.vector[0])
+        print(self.vector[hijo_izq][0])
+        while control and hijo_izq < self.tamanio:
+            hijo_der = hijo_izq + 1
+            aux = hijo_izq
+            if hijo_der < self.tamanio:
+                if self.vector[hijo_der][0] < self.vector[hijo_izq][0]:
+                    aux = hijo_der
+            if self.vector[indice][0] > self.vector[aux][0]:
+                self.intercambio(self.vector, indice, aux)
+                indice = aux
+                hijo_izq = (indice * 2) + 1
+            else:
+                control = False
+
+
     def agregar(self, dato):
+        self.vector[self.tamanio - 1] = dato
+        self.flotar(self.tamanio - 1)
+        self.tamanio += 1
+
+
+    def agregar_prioridad(self, dato):
+        print(self.tamanio)
+        print(len(self.vector))
         self.vector[self.tamanio] = dato
-        self.flotar(self.tamanio)
+        self.flotar_prioridad(self.tamanio)
+        print(self.vector[0 + self.tamanio])
         self.tamanio += 1
 
 
@@ -48,6 +84,13 @@ class Heap(object):
         self.hundir(0)
         return dato
 
+
+    def quitar_prioridad(self):
+        self.intercambio(self.vector, 0, self.tamanio - 1)
+        dato = self.vector[self.tamanio - 1]
+        self.tamanio -= 1
+        self.hundir_prioridad(0)
+        return dato
 
     def cantidad_elementos(self):
         return self.tamanio
@@ -70,7 +113,7 @@ class Heap(object):
 
 
     def arribo(self, dato, prioridad):
-        self.agregar([prioridad, dato])
+        self.agregar_prioridad([prioridad, dato])
 
 
     def atencion(self):
@@ -87,6 +130,8 @@ class Heap(object):
 
 
     # para ordenar un vector
+
+
     def monticulizar(self):
         for i in range(len(self.vector)):
             self.flotar(i)
@@ -97,6 +142,9 @@ class Heap(object):
         for _ in range(self.tamanio):
             self.quitar()
         self.tamanio = aux
+
+
+    # para buscar
 
 
     def busqueda_secu(self, elem):
@@ -114,7 +162,6 @@ class Heap(object):
         while izq <= der:
             mitad = (der + izq) // 2
             if self.vector[mitad] == elem:
-                print(mitad)
                 return mitad
             elif elem < self.vector[mitad]:
                 izq = mitad + 1
@@ -123,12 +170,11 @@ class Heap(object):
         return None
 
 
-    def  busqueda_bin_rec(self, elem, izq, der):
+    def busqueda_bin_rec(self, elem, izq, der):
         mitad = (der + izq) // 2
         if izq <= der:
             return None
         elif self.vector[mitad] == elem:
-            print(mitad)
             return mitad
         elif elem < self.vector[mitad]:
             return self.busqueda_bin_rec(elem, mitad + 1, der)
