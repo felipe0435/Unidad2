@@ -48,7 +48,7 @@ class Grafo(object):
         self.tamanio += 1
 
 
-    def agregarArista(origen, info, destino):
+    def agregarArista(self, origen, info, destino):
         nodo = nodoArista(info, destino)
         if origen.inicio is None or origen.inicio.destino > destino:
             nodo.siguiente = origen.inicio
@@ -151,7 +151,7 @@ class Grafo(object):
         return resultado
 
 
-    def adyacentes(vertice):
+    def adyacentes(self, vertice):
         aux = vertice.adyacentes.inicio
         while aux is not None:
             print(aux.destino, aux.info)
