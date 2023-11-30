@@ -29,13 +29,17 @@ class Pila(object):
 
     def imprimir(self):
         pilaAuxiliar = Pila()
+        total = 0
         while not self.esVacia():
             info = self.desapilar()
-            print(info[1][0].info,info[0],info[1][1].info)
+            total += info[0]
+            print(info[1][1].info,info[0], "h",info[1][0].info)
             pilaAuxiliar.apilar(info)
         while not pilaAuxiliar.esVacia():
             info = pilaAuxiliar.desapilar()
             self.apilar(info)
+
+        print("Tiempo total de viaje:", total, "h")
 
 
     def enCima(self):

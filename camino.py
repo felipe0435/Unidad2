@@ -70,5 +70,4 @@ def crear_grafo(grafo):
 if __name__ == "__main__":
     grafo = Grafo()
     crear_grafo(grafo)
-    grafo.adyacentes(grafo.buscarVertice("Chile"))
     grafo.dijkstra(grafo.buscarVertice("Chile"), grafo.buscarVertice("Espania"))

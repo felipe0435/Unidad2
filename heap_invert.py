@@ -72,7 +72,6 @@ class Heap(object):
     def agregar_prioridad(self, dato):
         self.vector[self.tamanio - 1] = dato
         self.flotar_prioridad(self.tamanio - 1)
-        print(self.vector[0])
 
 
     def quitar(self):
