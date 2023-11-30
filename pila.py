@@ -31,7 +31,7 @@ class Pila(object):
         pilaAuxiliar = Pila()
         while not self.esVacia():
             info = self.desapilar()
-            print(info[1][0].info,info[0],info[1][1] )
+            print(info[1][0].info,info[0],info[1][1].info)
             pilaAuxiliar.apilar(info)
         while not pilaAuxiliar.esVacia():
             info = pilaAuxiliar.desapilar()
@@ -43,3 +43,15 @@ class Pila(object):
             return self.cima.info
         else:
             return None
+
+
+    def limpiar(self, origen, destino):
+        pilaAuxiliar = Pila()
+        while not self.esVacia():
+            info = self.desapilar()
+            if info[1][0] == destino or (info[1][0] == destino and info[1][1] == origen):
+                pilaAuxiliar.apilar(info)
+                destino = info[1][1]
+        while not pilaAuxiliar.esVacia():
+            info = pilaAuxiliar.desapilar()
+            self.apilar(info)

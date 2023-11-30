@@ -156,7 +156,6 @@ class Heap(object):
     def busqueda_prioridad(self, elem):
         for i in range(len(self.vector)):
             if elem == self.vector[i][1][0]:
-                print(i)
                 return i
         return None
 

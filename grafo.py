@@ -220,56 +220,56 @@ class Grafo(object):
         camino = Pila()
         aux = self.inicio
         while aux is not None:
-            print(aux)
             if aux == origen:
                 no_visitados.arribo([aux, None], 0)
             else:
                 no_visitados.arribo([aux, None], inf)
             aux = aux.siguiente
 
-        print("-------------")
-        for i in range(no_visitados.tamanio):
-            print(no_visitados.vector[i])
-
         while not no_visitados.heap_vacio():
-            print("-------------")
             dato = no_visitados.atencion()
-            camino.apilar(dato)
+            if dato[1][1] != None:
+                camino.apilar(dato)
             aux = dato[1][0].adyacentes.inicio
             while aux is not None:
-                print(self.buscarVertice(aux.destino))
+                #print(self.buscarVertice(aux.destino))
                 pos = no_visitados.busqueda_prioridad(self.buscarVertice(aux.destino))
-                print(no_visitados.vector[pos])
+                #print(no_visitados.vector[pos])
                 if no_visitados.vector[pos][0] > dato[0] + aux.info:
-                    no_visitados.vector[pos][1][1] = dato[1][0].info
+                    no_visitados.vector[pos][1][1] = dato[1][0]
                     no_visitados.cambiar_prioridad(pos, dato[0] + aux.info)
                 aux = aux.siguiente
+
+        camino.limpiar(origen, destino)
+        camino.imprimir()
         return camino
+
 
 
 """
     def dijkstra_unica_ruta(self, nodo_inicial, nodo_destino):
-    distancia = {nodo: float('inf') for nodo in self.nodos}
-    distancia[nodo_inicial] = 0
+        distancia = {nodo: float('inf') for nodo in self.nodos}
+        distancia[nodo_inicial] = 0
 
-    heap = [(0, nodo_inicial)]
-    padres = {nodo_inicial: None}
+        heap = [(0, nodo_inicial)]
+        padres = {nodo_inicial: None}
 
-    while heap:
-        (dist, nodo_actual) = heapq.heappop(heap)
+        while heap:
+            (dist, nodo_actual) = heapq.heappop(heap)
 
-        if nodo_actual == nodo_destino:
-            # Construir la ruta si hemos llegado al nodo destino
-            ruta = []
-            while nodo_actual is not None:
-                ruta.insert(0, nodo_actual)
-                nodo_actual = padres[nodo_actual]
-            return ruta
+            if nodo_actual == nodo_destino:
+                # Construir la ruta si hemos llegado al nodo destino
+                ruta = []
+                while nodo_actual is not None:
+                    ruta.insert(0, nodo_actual)
+                    nodo_actual = padres[nodo_actual]
+                return ruta
 
-        for vecino, peso in self.aristas[nodo_actual].items():
-            nueva_distancia = distancia[nodo_actual] + peso
-            if nueva_distancia < distancia[vecino]:
-                distancia[vecino] = nueva_distancia
-                padres[vecino] = nodo_actual
-                heapq.heappush(heap, (nueva_distancia, vecino))
+            for vecino, peso in self.aristas[nodo_actual].items():
+                nueva_distancia = distancia[nodo_actual] + peso
+                if nueva_distancia < distancia[vecino]:
+                    distancia[vecino] = nueva_distancia
+                    padres[vecino] = nodo_actual
+                    heapq.heappush(heap, (nueva_distancia, vecino))
+
 """
