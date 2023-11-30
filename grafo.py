@@ -238,6 +238,8 @@ class Grafo(object):
                     no_visitados.cambiar_prioridad(pos, dato[0] + aux.info)
                 aux = aux.siguiente
 
+        camino.imprimir()
+        print("================================")
         camino.limpiar(origen, destino)
         camino.imprimir()
         return camino

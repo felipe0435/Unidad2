@@ -62,7 +62,7 @@ def crear_grafo(grafo):
     grafo.insertarArista(2.0, grafo.buscarVertice("Colombia"), grafo.buscarVertice("Venezuela"))
     #grafo.insertarArista(10.0, grafo.buscarVertice("Colombia"), grafo.buscarVertice("Espania"))
     grafo.insertarArista(4.7, grafo.buscarVertice("Colombia"), grafo.buscarVertice("Mexico"))
-    grafo.insertarArista(9.0, grafo.buscarVertice("Venezuela"), grafo.buscarVertice("Espania"))
+    #grafo.insertarArista(9.0, grafo.buscarVertice("Venezuela"), grafo.buscarVertice("Espania"))
     #grafo.insertarArista(5.0, grafo.buscarVertice("Venezuela"), grafo.buscarVertice("Mexico"))
     grafo.insertarArista(11.4, grafo.buscarVertice("Espania"), grafo.buscarVertice("Mexico"))
 
@@ -70,4 +70,4 @@ def crear_grafo(grafo):
 if __name__ == "__main__":
     grafo = Grafo()
     crear_grafo(grafo)
-    grafo.dijkstra(grafo.buscarVertice("Chile"), grafo.buscarVertice("Espania"))
+    grafo.dijkstra(grafo.buscarVertice("Venezuela"), grafo.buscarVertice("Argentina"))
