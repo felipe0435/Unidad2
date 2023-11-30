@@ -1,4 +1,5 @@
 from heap_invert import Heap
+import csv
 import random
 import time
 
@@ -17,7 +18,7 @@ if __name__ == "__main__":
             heap.monticulizar()
             heap.HeapSort()
             fin = time.time()
-            # Calculo de tiempo
+            # Calculo de ti
             tiempo += fin - inicio
         tiempo /= 10
         print(tiempo)

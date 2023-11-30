@@ -1,28 +1,32 @@
 # Padres menores que hijos
 class Heap(object):
     def __init__(self, tamanio):
-        self.tamanio = 0
+        self.tamanio = tamanio
         self.vector = [None] * tamanio
 
 
-    def intercambio(self, vector, a, b):
-        aux = vector[a]
-        vector[a] = vector[b]
-        vector[b] = aux
+    def intercambio(self, a, b):
+        aux = self.vector[a]
+        self.vector[a] = self.vector[b]
+        self.vector[b] = aux
 
 
     def flotar(self, indice):
         while indice > 0 and self.vector[indice] < self.vector[(indice - 1) // 2]:
             padre = (indice - 1) // 2
-            self.intercambio(self.vector, indice, padre)
+            self.intercambio(indice, padre)
             indice = padre
 
 
     def flotar_prioridad(self, indice):
-        while self.vector[(indice - 1) // 2] == None or indice > 0 and self.vector[indice][0] < self.vector[(indice - 1) // 2][0]:
+        while indice > 0 and (self.vector[(indice - 1) // 2] == None or self.vector[indice][0] < self.vector[(indice - 1) // 2][0] or self.vector[indice - 1] == None):
             padre = (indice - 1) // 2
-            self.intercambio(self.vector, indice, padre)
-            indice = padre
+            if self.vector[indice - 1] == None:
+                self.intercambio(indice, indice - 1)
+                indice -= 1
+            else:
+                self.intercambio(indice, padre)
+                indice = padre
 
 
     def hundir(self, indice):
@@ -35,7 +39,7 @@ class Heap(object):
                 if self.vector[hijo_der] < self.vector[hijo_izq]:
                     aux = hijo_der
             if self.vector[indice] > self.vector[aux]:
-                self.intercambio(self.vector, indice, aux)
+                self.intercambio(indice, aux)
                 indice = aux
                 hijo_izq = (indice * 2) + 1
             else:
@@ -45,9 +49,6 @@ class Heap(object):
     def hundir_prioridad(self, indice):
         hijo_izq = (indice * 2) + 1
         control = True
-        print("---------")
-        print(self.vector[0])
-        print(self.vector[hijo_izq][0])
         while control and hijo_izq < self.tamanio:
             hijo_der = hijo_izq + 1
             aux = hijo_izq
@@ -55,7 +56,7 @@ class Heap(object):
                 if self.vector[hijo_der][0] < self.vector[hijo_izq][0]:
                     aux = hijo_der
             if self.vector[indice][0] > self.vector[aux][0]:
-                self.intercambio(self.vector, indice, aux)
+                self.intercambio(indice, aux)
                 indice = aux
                 hijo_izq = (indice * 2) + 1
             else:
@@ -69,16 +70,13 @@ class Heap(object):
 
 
     def agregar_prioridad(self, dato):
-        print(self.tamanio)
-        print(len(self.vector))
-        self.vector[self.tamanio] = dato
-        self.flotar_prioridad(self.tamanio)
-        print(self.vector[0 + self.tamanio])
-        self.tamanio += 1
+        self.vector[self.tamanio - 1] = dato
+        self.flotar_prioridad(self.tamanio - 1)
+        print(self.vector[0])
 
 
     def quitar(self):
-        self.intercambio(self.vector, 0, self.tamanio - 1)
+        self.intercambio(0, self.tamanio - 1)
         dato = self.vector[self.tamanio - 1]
         self.tamanio -= 1
         self.hundir(0)
@@ -86,7 +84,7 @@ class Heap(object):
 
 
     def quitar_prioridad(self):
-        self.intercambio(self.vector, 0, self.tamanio - 1)
+        self.intercambio(0, self.tamanio - 1)
         dato = self.vector[self.tamanio - 1]
         self.tamanio -= 1
         self.hundir_prioridad(0)
@@ -117,16 +115,16 @@ class Heap(object):
 
 
     def atencion(self):
-        return self.quitar()[1]
+        return self.quitar_prioridad()
 
 
     def cambiar_prioridad(self, indice, prioridad):
-        prioridad_anterior = self[indice][0]
-        self[indice][0] = prioridad
+        prioridad_anterior = self.vector[indice][0]
+        self.vector[indice][0] = prioridad
         if prioridad > prioridad_anterior:
-            self.flotar(indice)
+            self.flotar_prioriodad(indice)
         elif prioridad < prioridad_anterior:
-            self.hundir(indice)
+            self.hundir_prioridad(indice)
 
 
     # para ordenar un vector
@@ -152,7 +150,14 @@ class Heap(object):
             if elem == self.vector[i]:
                 print(i)
                 return i
+        return None
 
+
+    def busqueda_prioridad(self, elem):
+        for i in range(len(self.vector)):
+            if elem == self.vector[i][1][0]:
+                print(i)
+                return i
         return None
 
 

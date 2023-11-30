@@ -227,13 +227,19 @@ class Grafo(object):
                 no_visitados.arribo([aux, None], inf)
             aux = aux.siguiente
 
+        print("-------------")
+        for i in range(no_visitados.tamanio):
+            print(no_visitados.vector[i])
+
         while not no_visitados.heap_vacio():
+            print("-------------")
             dato = no_visitados.atencion()
             camino.apilar(dato)
             aux = dato[1][0].adyacentes.inicio
-
             while aux is not None:
-                pos = no_visitados.buscar(self.buscarVertice(aux.destino))
+                print(self.buscarVertice(aux.destino))
+                pos = no_visitados.busqueda_prioridad(self.buscarVertice(aux.destino))
+                print(no_visitados.vector[pos])
                 if no_visitados.vector[pos][0] > dato[0] + aux.info:
                     no_visitados.vector[pos][1][1] = dato[1][0].info
                     no_visitados.cambiar_prioridad(pos, dato[0] + aux.info)

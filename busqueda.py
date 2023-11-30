@@ -5,8 +5,8 @@ import time
 tiempos_secu = []
 tiempos_iter = []
 tiempos_rec = []
-vector = random.sample(range(1000,10000000000000),10000000)
-heap = Heap(10000000)
+vector = random.sample(range(1000,10000000000000),1000000)
+heap = Heap(1000000)
 heap.vector = vector
 heap.monticulizar()
 heap.HeapSort()
