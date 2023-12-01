@@ -1,6 +1,4 @@
 from grafo import Grafo
-import time
-import random
 
 
 def crear_grafo(grafo):

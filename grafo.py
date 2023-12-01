@@ -2,7 +2,6 @@ from math import inf
 from cola import Cola
 from heap_invert import Heap
 from pila import Pila
-import heapq
 
 
 class nodoArista(object):

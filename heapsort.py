@@ -1,5 +1,4 @@
 from heap_invert import Heap
-import csv
 import random
 import time
 
