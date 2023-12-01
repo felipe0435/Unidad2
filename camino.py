@@ -40,4 +40,4 @@ def crear_grafo(grafo):
 if __name__ == "__main__":
     grafo = Grafo()
     crear_grafo(grafo)
-    grafo.dijkstra(grafo.buscarVertice("Venezuela"), grafo.buscarVertice("Argentina"))
+    grafo.dijkstra(grafo.buscarVertice("Colombia"), grafo.buscarVertice("Espania"))

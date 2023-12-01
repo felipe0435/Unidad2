@@ -51,11 +51,24 @@ class Pila(object):
 
     def limpiar(self, origen, destino):
         pilaAuxiliar = Pila()
+        pilaAuxiliar2 = Pila()
         while not self.esVacia():
             info = self.desapilar()
             if info[1][0] == destino or (info[1][0] == destino and info[1][1] == origen):
                 pilaAuxiliar.apilar(info)
                 destino = info[1][1]
+            pilaAuxiliar2.apilar(info)
         while not pilaAuxiliar.esVacia():
             info = pilaAuxiliar.desapilar()
             self.apilar(info)
+        while not pilaAuxiliar2.esVacia():
+            info = pilaAuxiliar2.desapilar()
+            if info[1][0] == destino or (info[1][0] == destino and info[1][1] == origen):
+                self.apilar(info)
+                destino = info[1][1]
+            pilaAuxiliar.apilar(info)
+        while not pilaAuxiliar.esVacia():
+            info = pilaAuxiliar.desapilar()
+            if info[1][0] == destino or (info[1][0] == destino and info[1][1] == origen):
+                self.apilar(info)
+                destino = info[1][1]

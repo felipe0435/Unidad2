@@ -228,7 +228,7 @@ class Grafo(object):
 
         while not no_visitados.heap_vacio():
             dato = no_visitados.atencion()
-            if dato[1][1] != None:
+            if dato[1][0] != origen:
                 camino.apilar(dato)
             aux = dato[1][0].adyacentes.inicio
             while aux is not None:
@@ -238,7 +238,7 @@ class Grafo(object):
                     no_visitados.cambiar_prioridad(pos, dato[0] + aux.info)
                 aux = aux.siguiente
 
-        camino.imprimir()
+        #camino.imprimir()
         print("================================")
         camino.limpiar(origen, destino)
         camino.imprimir()
